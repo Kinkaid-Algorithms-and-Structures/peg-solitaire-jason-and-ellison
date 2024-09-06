@@ -23,7 +23,7 @@ def print_Board(board: dict[int, tuple[int, int, int, bool]]) -> None:
         if board[i][3] == False:
             print(f"  {i}  ", end = "")
         else:
-            print(f" |{i}| ", end = "")
+            print(f" [{i}] ", end = "")
 
 
 print_Board(pegt_board)
