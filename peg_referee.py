@@ -1,6 +1,8 @@
 from operator import truediv
 from xmlrpc.client import boolean
 
+from jupyterlab.semver import valid
+
 #peg:(value, row, position in row, pegBool)
 pegt_board: dict[int, tuple[int, int, int, bool]] = {1:(1,1,1,True),
                                                      2:(2,2,1,True),3:(3,2,2,True),
@@ -17,9 +19,46 @@ def validity_jump(self, peg_move_to: int, peg_move_from: int) -> bool:
         pegt_board.get(self, peg_move_from[3]==True and pegt_board.get(self,peg_move_to[3]==False))):
 
         return True
+    else:
+        return False
+
+def validity_jump_over(self, peg_jump_over)->bool:
+    if pegt_board.get(self,peg_jump_over)[3] == True:
+        return True
+    else:
+        return False
 
 
-def check_Keep_Going(peg_Board: dict[int, bool]) -> bool:
+def return_jump_over(self, peg_move_to:int, peg_move_from:int)->int:
+
+    if pegt_board.get(self, peg_move_from)[1]>pegt_board.get(self, peg_move_to)[1]:
+        if pegt_board.get(self, peg_move_from)[2]==pegt_board.get(self, peg_move_to)[2]:
+            for key, value_tuple in pegt_board.items():
+                if value_tuple[1]==pegt_board.get(self,peg_move_from)[1]+1 and value_tuple[2]==pegt_board.get(self,peg_move_from)[2]:
+                    for key, value_tuple, in pegt_board.items():
+                        return key
+
+        elif abs(pegt_board.get(self, peg_move_from)[2] - pegt_board.get(self, peg_move_to)[2])==2:
+            for key, value_tuple in pegt_board.items():
+                if value_tuple[1]==pegt_board.get(self,peg_move_from)[1]+1 and value_tuple[2]==pegt_board.get(self,peg_move_from)[2]+1:
+                    for key, value_tuple, in pegt_board.items():
+                        return key
+
+    else:
+        if pegt_board.get(self, peg_move_from)[2]==pegt_board.get(self, peg_move_to)[2]:
+            for key, value_tuple in pegt_board.items():
+                if value_tuple[1] == pegt_board.get(self, peg_move_from)[1] -1 and value_tuple[2] == pegt_board.get(self,peg_move_from)[2]:
+                    for key, value_tuple, in pegt_board.items():
+                        return key
+        elif abs(pegt_board.get(self, peg_move_from)[2] - pegt_board.get(self, peg_move_to)[2])==2:
+            for key, value_tuple in pegt_board.items():
+                if value_tuple[1] == pegt_board.get(self, peg_move_from)[1] -1 and value_tuple[2] == pegt_board.get(self,peg_move_from)[2]-1:
+                    for key, value_tuple, in pegt_board.items():
+                        return key
+
+
+
+def check_keep_going(peg_Board: dict[int, bool]) -> bool:
     peg_counter = 0;
     for key in peg_Board:
         if (key[3]==True):
@@ -31,9 +70,19 @@ def check_Keep_Going(peg_Board: dict[int, bool]) -> bool:
         peg_counter = 0
         return True
 
+def final_validity (self, validity_to_move, validity_to_jump):
+    if validity_to_move and validity_to_jump:
+        return True
+    else:
+        return False
 
-def peg_mover(self, validity_move: bool, peg_move_to: int, peg_move_from: int) -> None:
-    pegt_board[peg_move_from][3] = False
-    pegt_board[peg_move_to][3] = True
+
+def peg_mover(self, validity_move: bool, peg_move_to: int, peg_move_from: int, peg_jump_over:int) -> None:
+    if validity_move:
+        pegt_board[peg_move_from][3] = False
+        pegt_board[peg_move_to][3] = True
+        pegt_board[peg_jump_over][3]=False
+    else:
+        print("This is not a valid move!")
 
 
