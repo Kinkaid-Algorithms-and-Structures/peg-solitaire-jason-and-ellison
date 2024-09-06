@@ -19,7 +19,7 @@ def validity_jump(self, peg_move_to: int, peg_move_from: int) -> bool:
         return True
 
 
-def check_Keep_Going(self, peg_Board: dict[int, bool]) -> bool:
+def check_Keep_Going(peg_Board: dict[int, bool]) -> bool:
     peg_counter = 0;
     for key in peg_Board:
         if (key[3]==True):
@@ -32,7 +32,8 @@ def check_Keep_Going(self, peg_Board: dict[int, bool]) -> bool:
         return True
 
 
-    pass
-
 def peg_mover(self, validity_move: bool, peg_move_to: int, peg_move_from: int) -> None:
-    pass
+    pegt_board[peg_move_from][3] = False
+    pegt_board[peg_move_to][3] = True
+
+
