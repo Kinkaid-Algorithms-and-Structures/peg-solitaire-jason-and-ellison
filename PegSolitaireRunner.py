@@ -12,11 +12,11 @@ class PegSolitaireRunner:
         pass
 
     def main(self):
-        print("Starting game")
+        print("\nStarting game")
         # add any code you ant to set up variables for the game.
         ref = peg_referee()
         peg_referee.startgame(ref)
-        print("Ending game ")
+        print("\nEnding game ")
 
 game = PegSolitaireRunner()
 game.main()
