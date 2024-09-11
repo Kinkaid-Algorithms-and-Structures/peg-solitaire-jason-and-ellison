@@ -15,4 +15,3 @@ class peg_controller:
 
     def remove_first_peg(self):
         peg_controller.first_remove = input("What number peg would you like to remove to start the game?")
-        print(peg_controller.first_remove)

@@ -5,7 +5,6 @@ from jupyterlab.semver import valid
 
 from peg_controller import peg_controller
 import peg_viewer
-from peg_viewer import pegt_board
 
 
 class peg_referee:
@@ -26,13 +25,13 @@ class peg_referee:
 
     def startgame(self):
         a=peg_controller()
-        onetoremove = a.remove_first_peg()
-        print(onetoremove)
+        a.remove_first_peg()
+        onetoremove = a.first_remove
         peg_referee.pegt_board[onetoremove][3] = False
 
         while peg_referee.keepgoing:
-            peg_viewer.print_Board(pegt_board)
-            peg_controller.retrieve_value()
+            peg_viewer.print_Board(peg_referee.pegt_board)
+            peg_controller.retrieve_value(a)
             if peg_referee.validity_jump(self, peg_controller.peg_move_to, peg_controller.peg_move_from) and peg_referee.validity_jump_over(self, peg_controller.peg_move_to, peg_controller.peg_move_from):
                 peg_referee.peg_mover(self, peg_controller.peg_move_to, peg_controller.peg_move_from,peg_referee.return_jump_over(self, peg_controller.peg_move_to,peg_controller.peg_move_from))
             else:
