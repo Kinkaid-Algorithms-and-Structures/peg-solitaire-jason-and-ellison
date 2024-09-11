@@ -19,3 +19,4 @@ class peg_controller:
         peg_controller.first_remove = input("What number peg would you like to remove to start the game?")
         peg_controller.first_remove = int(peg_controller.first_remove)
         print(peg_controller.first_remove)
+
