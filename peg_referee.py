@@ -3,7 +3,7 @@ from xmlrpc.client import boolean
 
 from jupyterlab.semver import valid
 
-import peg_controller
+from peg_controller import peg_controller
 import peg_viewer
 from peg_viewer import pegt_board
 
@@ -25,8 +25,9 @@ class peg_referee:
 
 
     def startgame(self):
-
-        onetoremove = peg_controller.remove_first_peg()
+        a=peg_controller()
+        onetoremove = a.remove_first_peg()
+        print(onetoremove)
         peg_referee.pegt_board[onetoremove][3] = False
 
         while peg_referee.keepgoing:

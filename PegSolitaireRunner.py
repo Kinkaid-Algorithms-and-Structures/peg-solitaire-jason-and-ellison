@@ -8,6 +8,8 @@ logging.basicConfig(level=logging.INFO)  # simple version to the output console
 #                     datefmt="%H:%M:%S %p --- ")  # more robust, sent to a file cNode = Tuple[int, T]
 
 class PegSolitaireRunner:
+    def __init__(self):
+        pass
 
     def main(self):
         print("Starting game")
@@ -15,6 +17,10 @@ class PegSolitaireRunner:
         ref = peg_referee()
         peg_referee.startgame(ref)
         print("Ending game ")
+
+game = PegSolitaireRunner()
+game.main()
+
 
 
 
