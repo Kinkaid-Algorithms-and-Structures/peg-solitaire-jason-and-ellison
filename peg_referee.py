@@ -3,6 +3,11 @@ from xmlrpc.client import boolean
 
 from jupyterlab.semver import valid
 
+import peg_controller
+import peg_viewer
+from peg_viewer import pegt_board
+
+
 class peg_referee:
 #peg:(value, row, position in row, pegBool)
 
@@ -14,12 +19,27 @@ class peg_referee:
     keepgoing = True
 
 
+
     def __init__ (self):
         pass
 
 
     def startgame(self):
-        pass
+
+        onetoremove = peg_controller.remove_first_peg()
+        peg_referee.pegt_board[onetoremove][3] = False
+
+        while peg_referee.keepgoing:
+            peg_viewer.print_Board(pegt_board)
+            peg_controller.retrieve_value()
+            if peg_referee.validity_jump(self, peg_controller.peg_move_to, peg_controller.peg_move_from) and peg_referee.validity_jump_over(self, peg_controller.peg_move_to, peg_controller.peg_move_from):
+                peg_referee.peg_mover(self, peg_controller.peg_move_to, peg_controller.peg_move_from,peg_referee.return_jump_over(self, peg_controller.peg_move_to,peg_controller.peg_move_from))
+            else:
+                print ("This is not a valid move!")
+            peg_referee.check_keep_going(self)
+
+
+
 
     def validity_jump(self, peg_move_to: int, peg_move_from: int) -> bool:
         if  (peg_referee.pegt_board[peg_move_from][0] == peg_referee.pegt_board[peg_move_to][1] and
@@ -31,7 +51,7 @@ class peg_referee:
             return False
 
     def validity_jump_over(self, peg_jump_over)->bool:
-        if peg_referee.pegt_board[peg_jump_over][3] == True:
+        if peg_referee.pegt_board[peg_jump_over][3]:
             return True
         else:
             return False
@@ -78,19 +98,13 @@ class peg_referee:
             peg_counter = 0
             peg_referee.keepgoing = True
 
-    def final_validity (self, validity_to_move, validity_to_jump)->bool:
-        if validity_to_move and validity_to_jump:
-            return True
-        else:
-            return False
 
 
-    def peg_mover(self, validity_move: bool, peg_move_to: int, peg_move_from: int, peg_jump_over:int) -> None:
-        if validity_move:
+    def peg_mover(self,  peg_move_to: int, peg_move_from: int, peg_jump_over:int) -> None:
+
             peg_referee.pegt_board[peg_move_from][3] = False
             peg_referee.pegt_board[peg_move_to][3] = True
             peg_referee.pegt_board[peg_jump_over][3]=False
-        else:
-            print("This is not a valid move!")
+
 
 

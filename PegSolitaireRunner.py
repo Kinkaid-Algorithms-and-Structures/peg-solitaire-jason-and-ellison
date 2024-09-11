@@ -13,9 +13,8 @@ class PegSolitaireRunner:
         print("Starting game")
         # add any code you ant to set up variables for the game.
         ref = peg_referee()
-        peg_referee.startgame()
+        peg_referee.startgame(ref)
         print("Ending game ")
 
 
-    if __name__ == "__main__":
-         main()
+
