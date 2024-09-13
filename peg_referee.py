@@ -138,24 +138,10 @@ class peg_referee:
 
     def checkneighbor (self):
 
-        for keynumber in peg_referee.pegt_board:
-           if peg_referee.pegt_board[keynumber][3]:
-               if keynumber in peg_referee.neighbormatch:
-                   for item in peg_referee.neighbormatch[keynumber]:
-                       if peg_referee.pegt_board[item][3]:
-                            return
-
-               for key, value_list in peg_referee.neighbormatch.items():
-                    for value in value_list:
-                        if value == keynumber:
-                            if peg_referee.pegt_board[key][3]:
-                                return
-
-               for key, value_list in peg_referee.pegt_board.items():
-                   if value_list[1] == peg_referee.pegt_board[keynumber][1]:
-                       if value_list[3]:
-                           return
-
+        for key in peg_referee.pegt_board:
+            for key_match in peg_referee.pegt_board:
+                if peg_referee.validity_jump(self,key,key_match) and peg_referee.validity_jump_over(self, peg_referee.return_jump_over(self,key,key_match)):
+                    return
 
         print("You've lost, no moves available")
         peg_viewer.print_Board(peg_referee.pegt_board)
