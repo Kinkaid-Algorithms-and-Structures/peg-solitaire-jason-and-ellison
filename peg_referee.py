@@ -67,8 +67,12 @@ class peg_referee:
 
     def validity_jump_over(self, peg_jump_over)->bool:
 
-        if peg_referee.pegt_board[peg_jump_over][3]:
+        if peg_jump_over == None:
+            return False
+
+        elif peg_referee.pegt_board[peg_jump_over][3]:
             return True
+
         else:
             return False
 
@@ -117,6 +121,7 @@ class peg_referee:
                 peg_counter+=1
 
         if peg_counter <=1:
+            peg_viewer.print_Board(peg_referee.pegt_board)
             print("You've won!")
             peg_referee.keepgoing = False
         else:
@@ -145,6 +150,11 @@ class peg_referee:
                         if value == keynumber:
                             if peg_referee.pegt_board[key][3]:
                                 return
+
+               for key, value_list in peg_referee.pegt_board.items():
+                   if value_list[1] == peg_referee.pegt_board[keynumber][1]:
+                       if value_list[3]:
+                           return
 
 
         print("You've lost, no moves available")
