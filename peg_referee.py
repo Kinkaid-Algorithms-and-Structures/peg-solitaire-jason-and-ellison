@@ -16,10 +16,7 @@ class peg_referee:
                                                         7: [2, 4, 1, True], 8: [3, 4, 2, True], 9: [2, 4, 3, True],10: [3, 4, 4, True],
                                                         11: [1, 5, 1, True], 12: [4, 5, 2, True],13: [1, 5, 3, True], 14: [4, 5, 4, True],15: [1, 5, 5, True]}
 
-    neighbormatch: dict[int, list[int, int]] = {1:[2,3],
-                                                2:[4,5], 3:[5,6],
-                                                4:[7,8],5:[8,9],6:[9,10],
-                                                7:[11,12], 8:[12,13], 9:[13,14], 10:[14,15] }
+
     keepgoing = True
 
 
@@ -40,8 +37,6 @@ class peg_referee:
             if peg_referee.validity_jump(self, peg_controller.peg_move_to, peg_controller.peg_move_from) and peg_referee.validity_jump_over(self, peg_referee.return_jump_over(self,peg_controller.peg_move_to,peg_controller.peg_move_from)):
                 peg_referee.peg_mover(self, peg_controller.peg_move_to, peg_controller.peg_move_from,peg_referee.return_jump_over(self, peg_controller.peg_move_to,peg_controller.peg_move_from))
             else:
-                print(peg_referee.validity_jump(self, peg_controller.peg_move_to, peg_controller.peg_move_from))
-                print(peg_referee.validity_jump_over(self, peg_referee.return_jump_over(self,peg_controller.peg_move_to,peg_controller.peg_move_from)))
                 print ("This is not a valid move!")
             peg_referee.check_if_win(self)
             peg_referee.checkneighbor(self)
